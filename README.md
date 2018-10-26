@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # kindle-manager-mobile
 
 > A Vue.js project
@@ -19,3 +20,6 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+=======
+# kindle-manager-mobile
+>>>>>>> 9da0fceebe944ee3150bf125691d74570edb876b
