@@ -7,6 +7,7 @@ import '@/icons' // icon
 import store from './store'
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
+import '@/permission' // permission control login go page
 
 Vue.use(Mint);
 
