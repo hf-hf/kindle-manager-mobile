@@ -36,7 +36,7 @@ service.interceptors.response.use(
     if (res.code !== 200) {
       Toast({
           message: res.message,
-          iconClass: 'icon icon-error'
+          iconClass: 'mint-toast-icon mintui mintui-field-error'
       });
 
       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
@@ -44,7 +44,7 @@ service.interceptors.response.use(
       if (res.code === 401 || res.code === 403) {
         Toast({
             message: "你已被登出，可以取消继续留在该页面，或者重新登录",
-            iconClass: 'icon icon-error'
+            iconClass: 'mint-toast-icon mintui mintui-field-error'
         });
 
         // MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
@@ -67,7 +67,7 @@ service.interceptors.response.use(
     console.log('err' + error)// for debug
     Toast({
         message: error.message,
-        iconClass: 'icon icon-error'
+        iconClass: 'mint-toast-icon mintui mintui-field-error'
     });
     return Promise.reject(error)
   }

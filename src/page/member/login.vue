@@ -30,7 +30,7 @@ export default {
       if (!this.loginForm.username || !this.loginForm.password) {
         Toast({
           message: '请输入账号、密码！',
-          //iconClass: 'icon icon-error',
+          iconClass: 'mint-toast-icon mintui mintui-field-warning',
           //position: 'top',
         });
         return;

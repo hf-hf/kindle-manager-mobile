@@ -11,7 +11,7 @@
           <mt-cell-swipe v-for="(row, index) in data" :key="index" :title="row.name" :label="row.title" @click.native="getNovelDetail(row.id)">
             <mt-button size="small" v-if="row.isdel == 0" type="danger" @click.native="disableNovel(row.id,1)">{{ statusFilter(row.isdel) }}</mt-button>
             <mt-button size="small" v-if="row.isdel == 1" type="primary" @click.native="disableNovel(row.id,0)">{{ statusFilter(row.isdel) }}</mt-button>
-            <svg-icon slot="icon" :icon-class="followFilter(row.userId)" @click.native="doFollow(row.id, row.userId)"/>
+            <svg-icon slot="icon" :icon-class="followFilter(row.userId)" @click.native.stop="doFollow(row.id, row.userId)"/>
           </mt-cell-swipe>
         </mt-tab-container-item>
         <mt-tab-container-item id="订单">
@@ -148,7 +148,7 @@ export default {
       disableNovel(id,isdel).then(response =>{
         Toast({
             message: this.isdelTextMap[isdel] + '成功',
-            iconClass: 'icon icon-success',
+            iconClass: 'mint-toast-icon mintui mintui-success',
             duration: 2000
         });
         this.fetchData()
@@ -161,7 +161,7 @@ export default {
       followNovel(novelId, flag).then(response =>{
         Toast({
           message: response.data,
-          //type: 'success',
+          iconClass: 'mint-toast-icon mintui mintui-success',
           duration: 2000
         })
         this.fetchData()
