@@ -156,6 +156,12 @@ export default {
     },
     getNovelDetail(id){
       console.log(id)
+      this.$router.push({
+        path: '/novel/detail',
+        query: {
+          novelId: id
+        }
+      })
     },
     doFollow(novelId, flag){
       followNovel(novelId, flag).then(response =>{

@@ -8,6 +8,13 @@ export function getList(params) {
   })
 }
 
+export function getDetail(id) {
+  return request({
+    url: '/novel/get/' + id,
+    method: 'get'
+  })
+}
+
 export function guess(params) {
   return request({
     url: '/novel/guess',
