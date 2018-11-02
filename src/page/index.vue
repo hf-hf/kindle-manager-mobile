@@ -8,9 +8,16 @@
       </div>
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="小说">
-          <mt-cell-swipe v-for="(row, index) in data" :key="index" :title="row.name" :label="row.title" @click.native="getNovelDetail(row.id)">
-            <mt-button size="small" v-if="row.isdel == 0" type="danger" @click.native="disableNovel(row.id,1)">{{ statusFilter(row.isdel) }}</mt-button>
-            <mt-button size="small" v-if="row.isdel == 1" type="primary" @click.native="disableNovel(row.id,0)">{{ statusFilter(row.isdel) }}</mt-button>
+          <mt-cell-swipe v-for="(row, index) in data" :key="index" :title="row.name" :label="row.title" @click.native="getNovelDetail(row.id)"
+            :right="[
+                {
+                    content: statusFilter(row.isdel),
+                    style: { background: backGroupFilter(row.isdel), color: '#fff'},
+                    handler: () => disableNovel(row.id,row.isdel == 0 ? 1 : 0)
+                }
+            ]">
+            <!-- <mt-button size="small" v-if="row.isdel == 0" type="danger" @click.native.stop="disableNovel(row.id,1)">{{ statusFilter(row.isdel) }}</mt-button>
+            <mt-button size="small" v-if="row.isdel == 1" type="primary" @click.native.stop="disableNovel(row.id,0)">{{ statusFilter(row.isdel) }}</mt-button> -->
             <svg-icon slot="icon" :icon-class="followFilter(row.userId)" @click.native.stop="doFollow(row.id, row.userId)"/>
           </mt-cell-swipe>
         </mt-tab-container-item>
@@ -74,9 +81,10 @@
 
 <script>
 import { Toast, Loadmore } from 'mint-ui';
-import { getList,disableNovel,followNovel } from '@/api/novel.js'
+import { getList, disableNovel, followNovel } from '@/api/novel.js'
 
 const isdelStatus = ['启用', '禁用'];
+const swipeBackGroup = ['#09F768', '#F70938'];
 
 export default {
   name: 'page-tabbar',
@@ -132,6 +140,9 @@ export default {
         this.listQuery.pageSize = response.data.pageSize;
         //this.listLoading = false;
       })
+    },
+    backGroupFilter(isdel){
+      return swipeBackGroup[isdel];
     },
     statusFilter(status) {
       return isdelStatus[status];
