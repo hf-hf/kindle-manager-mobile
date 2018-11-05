@@ -8,6 +8,8 @@ const NovelDetail = () => import ('@/page/novel/detail')
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  base: process.env.ROUTER_BASE, // 这是新加的配置
   routes: [
     {
       path: '/',

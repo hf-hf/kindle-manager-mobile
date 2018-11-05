@@ -7,8 +7,10 @@
         <mt-cell class="page-part" title="当前选中" :value="selected" />
       </div>
       <mt-tab-container class="page-tabbar-container" v-model="selected">
-        <mt-tab-container-item id="小说">
-          <mt-cell-swipe v-for="(row, index) in data" :key="index" :title="row.name" :label="row.title" @click.native="getNovelDetail(row.id)"
+        <mt-tab-container-item id="小说" v-infinite-scroll="loadMore"
+            infinite-scroll-disabled="scrollDisabled"
+            infinite-scroll-distance="10">
+          <mt-cell-swipe v-for="row in data" :key="row.id" :title="row.name" :label="row.title" @click.native="getNovelDetail(row.id)"
             :right="[
                 {
                     content: statusFilter(row.isdel),
@@ -19,6 +21,7 @@
             <!-- <mt-button size="small" v-if="row.isdel == 0" type="danger" @click.native.stop="disableNovel(row.id,1)">{{ statusFilter(row.isdel) }}</mt-button>
             <mt-button size="small" v-if="row.isdel == 1" type="primary" @click.native.stop="disableNovel(row.id,0)">{{ statusFilter(row.isdel) }}</mt-button> -->
             <svg-icon slot="icon" :icon-class="followFilter(row.userId)" @click.native.stop="doFollow(row.id, row.userId)"/>
+            <span class="n-update-time">更新:{{ row.updateTimeText }}</span>
           </mt-cell-swipe>
         </mt-tab-container-item>
         <mt-tab-container-item id="订单">
@@ -80,7 +83,7 @@
 </template>
 
 <script>
-import { Toast, Loadmore } from 'mint-ui';
+import { Toast, Loadmore, Indicator } from 'mint-ui';
 import { getList, disableNovel, followNovel } from '@/api/novel.js'
 
 const isdelStatus = ['启用', '禁用'];
@@ -91,10 +94,12 @@ export default {
   data() {
     return {
       selected: '小说',
+      scrollDisabled: false,
       listQuery: {
         page: 1,
         total: null,
         pageSize: null,
+        rows: 10,
         importance: undefined,
         title: undefined,
         type: undefined,
@@ -186,6 +191,23 @@ export default {
     },
     leftButtonHandler(evt) {
       console.log(123);
+    },
+    loadMore() {
+      setTimeout(() => {
+        if(this.listQuery.total > this.listQuery.pageSize){
+          this.listQuery.pageSize +=10
+          if(this.listQuery.pageSize > this.listQuery.total){
+            this.listQuery.pageSize = this.listQuery.total;
+          }
+          this.fetchData()
+        } else{
+          this.scrollDisabled = true
+          Toast({
+            message: '已到底部！'
+          });
+          return;
+        }
+      }, 2500);
     }
   },
   created() {
@@ -220,5 +242,16 @@ export default {
   .mint-cell-title {
     letter-spacing:1px;
     line-height: 100%;
+  }
+  .mint-cell-title {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .n-update-time{
+    position:absolute;
+    font-size: 8px;
+    right:5px;
+    top:5px;
+    /* z-index:100; */
   }
 </style>

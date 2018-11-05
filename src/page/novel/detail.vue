@@ -9,8 +9,7 @@
         <mt-field label="内容标识" readonly="readonly" v-model="novel.contentSymbol"></mt-field>
         <br/>
         <mt-button size="large" type="primary">保存</mt-button>
-        <br/>
-        <mt-button size="large" type="danger" @click="backHome()">取消</mt-button>
+        <mt-button size="large" type="danger" @click="backHome()" style="margin-top: 5px;">取消</mt-button>
     </div>
 </template>
 <script>
