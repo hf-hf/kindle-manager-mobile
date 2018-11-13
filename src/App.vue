@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <mt-header fixed title="kindle-push">
-      <router-link to="/" slot="right" v-if="this.$route.path != '/login'">
+      <router-link to="/" slot="right" v-show="this.$route.path != '/login'">
         <mt-button @click="logout()">退出</mt-button>
       </router-link>
     </mt-header>

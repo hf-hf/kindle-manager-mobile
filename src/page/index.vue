@@ -86,8 +86,8 @@
 import { Toast, Loadmore, Indicator } from 'mint-ui';
 import { getList, disableNovel, followNovel } from '@/api/novel.js'
 
-const isdelStatus = ['启用', '禁用'];
-const swipeBackGroup = ['#09F768', '#F70938'];
+const isdelStatus = ['禁用', '启用'];
+const swipeBackGroup = ['#F70938', '#09F768'];
 
 export default {
   name: 'page-tabbar',

@@ -1,7 +1,7 @@
 <template>
    <div class="wrapper">
       <div class="title">
-          <span class="title">登录</span>
+          <span class="title">Kindle-Push Login</span>
       </div>
       <div class="login">
           <mt-field label="用户名" placeholder="请输入用户名" v-model="loginForm.username"></mt-field>
@@ -46,3 +46,9 @@ export default {
   }
 };
 </script>
+<style>
+  .title {
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+    font-weight: bold;
+  }
+</style>
